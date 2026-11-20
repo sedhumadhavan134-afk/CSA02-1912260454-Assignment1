@@ -1,0 +1,2 @@
+#include <stdio.h>
+int main(void){puts("Inputs: household ID, previous/current 16-bit readings, category.");puts("Outputs: units, slab energy charge, fixed charge, total in paise.");puts("Rules: non-negative bill; total = energy + fixed; rollover handled modulo 65536.");puts("Text readings need O(d) conversion and O(d) bytes; unsigned short is typically 2 bytes.");return 0;}

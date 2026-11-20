@@ -1,4 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-int main(void){char line[128],*end;long prev,curr;if(!fgets(line,sizeof line,stdin)){puts("Input error");return 1;}errno=0;prev=strtol(line,&end,10);if(errno||end==line){puts("Invalid previous reading");return 1;}while(*end==' '||*end=='\t')end++;curr=strtol(end,&end,10);if(errno||curr<0||curr>65535||prev<0||prev>65535){puts("Invalid reading range");return 1;}printf("Readings accepted: %ld %ld\n",prev,curr);return 0;}
+#include <ctype.h>
+static int parse_two_readings(char *line, long *previous, long *current) {
+    char *p = line, *end;
+    errno = 0; long a = strtol(p, &end, 10);
+    if (p == end || errno || a < 0 || a > 65535) return 0;
+    p = end; while (isspace((unsigned char)*p)) ++p;
+    errno = 0; long b = strtol(p, &end, 10);
+    if (p == end || errno || b < 0 || b > 65535) return 0;
+    p = end; while (isspace((unsigned char)*p)) ++p;
+    if (*p != '\0') return 0;
+    *previous = a; *current = b; return 1;
+}
+int main(void) {
+    char line[128]; long previous, current;
+    puts("Enter previous and current readings on one line (0-65535):");
+    if (!fgets(line, sizeof line, stdin) || !parse_two_readings(line, &previous, &current)) {
+        puts("Invalid input: enter exactly two readings in the range 0..65535.");
+        return 1;
+    }
+    printf("Readings accepted: %ld %ld\n", previous, current);
+    return 0;
+}

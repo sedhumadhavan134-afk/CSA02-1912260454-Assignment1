@@ -1,0 +1,2 @@
+#include <stdio.h>
+int main(void){printf("5/2 = %d (integer division)\n",5/2);printf("(double)5/2 = %.2f\n",(double)5/2);printf("(int)3.9 = %d (truncates)\n",(int)3.9);float f=0.1f;for(int i=0;i<4000;i++)f+=0.1f;long long paise=0;for(int i=0;i<4000;i++)paise+=10;printf("float sum=%.6f; integer paise sum=%lld (Rs %lld.%02lld)\n",f,paise,paise/100,paise%100);return 0;}

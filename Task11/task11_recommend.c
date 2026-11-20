@@ -1,0 +1,3 @@
+#include <stdio.h>
+#include <limits.h>
+int main(void){printf("Recommended: 16-bit unsigned meter register, wide unsigned units, int64_t/long long paise totals, string IDs.\n");printf("LLONG_MAX=%lld paise; validate maximum bill x household count before deployment.\n",LLONG_MAX);puts("Load tariff from validated configuration when rates change frequently; otherwise central constants are simpler.");return 0;}
